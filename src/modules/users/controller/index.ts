@@ -12,6 +12,15 @@ export class UserController {
         return response.status(200).json(result);
     }
 
+    
+    async findByName(request: Request, response: Response) {
+        const { name } = request.params;
+        const result = await this.UserRepository.findByName(name);
+
+        return response.status(200).json(result);
+    }
+
+
     async findAll(request: Request, response: Response) {
         const result = await this.UserRepository.findAll();
 

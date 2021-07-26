@@ -10,6 +10,10 @@ usersRoutes.get('/:id', VerifyJWT, (request, response) => {
     userController.findById(request, response);
 })
 
+usersRoutes.get('/username/:name', VerifyJWT, (request, response) => {
+    userController.findByName(request, response);
+})
+
 usersRoutes.get('/', VerifyJWT, (request, response) => {
     userController.findAll(request, response);
 })

@@ -19,6 +19,18 @@ export class UserRepository {
         }
     }
 
+    async findByName(username : string) {
+        try {
+            console.log(username)
+            const findByName = await conenctKnex('users').where('username', 'like', `%${username}%`);
+
+            return findByName;
+        } catch (error) {
+            console.log(error)
+            return error.message;
+        }
+    }
+
     async findAll() {
         try {
             const findAll = await conenctKnex('users');
