@@ -1,6 +1,7 @@
 export interface IUserService {
     username?: string
     user_id?: string
+    password?: string
 }
 
 export interface IMessage {
@@ -16,4 +17,5 @@ export interface IUserProps {
 export interface IUpdate {
     username: string
     user_id: string
+    password: string
 }
