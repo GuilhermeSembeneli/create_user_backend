@@ -1,7 +1,7 @@
 import { IUserProps, IUserService } from "../implements/IUserService";
 
 export class UserService {
-    validator(validated: 'username' | 'user_id', body: IUserService) {
+    validator(validated: 'username' | 'user_id' | 'password', body: IUserService) {
         let errors = [];
         if (!body[validated]) errors = [...errors, {
             [validated]: 'Campo obrigatorio.'
@@ -11,10 +11,34 @@ export class UserService {
     }
     responseValidator(key: string): IUserProps {
         switch (key) {
+            case 'success':
+                return {
+                    status: 201, message: {
+                        message: 'Usuario cadastrado.'
+                    }
+                }
+            case 'validatedtoken':
+                return {
+                    status: 201, message: {
+                        message: 'Token valido.'
+                    }
+                }
+            case 'updated':
+                return {
+                    status: 200, message: {
+                        message: 'Usuario alterado com sucesso!'
+                    }
+                }
             case 'duplicated':
                 return {
                     status: 406, message: {
                         error: 'Usuario já cadastrado.'
+                    }
+                }
+            case 'invaliduser':
+                return {
+                    status: 400, message: {
+                        error: 'Senha ou usúario invalido.'
                     }
                 }
             case 'notfound':
@@ -23,16 +47,16 @@ export class UserService {
                         error: 'Usuario não encontrado.'
                     }
                 }
-            case 'success':
+            case 'notoken':
                 return {
-                    status: 201, message: {
-                        message: 'Usuario cadastrado.'
+                    status: 400, message: {
+                        error: 'Token expirado.'
                     }
                 }
-            case 'updated':
+            case 'invalidtoken':
                 return {
-                    status: 200, message: {
-                        message: 'Usuario alterado com sucesso!'
+                    status: 400, message: {
+                        error: 'Token invalido.'
                     }
                 }
             case 'deleted':
