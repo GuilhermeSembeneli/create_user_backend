@@ -13,9 +13,8 @@ export class UserService {
         switch (key) {
             case 'success':
                 return {
-                    status: 201, message: {
-                        message: 'Usuario cadastrado.'
-                    }
+                    status: 201, message: 'Usuario cadastrado.'
+        
                 }
             case 'validatedtoken':
                 return {

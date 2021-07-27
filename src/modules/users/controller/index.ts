@@ -38,9 +38,12 @@ export class UserController {
 
         const result = await this.UserRepository.create({username, password});
 
-        const submitValidator = this.UserService.responseValidator(result);
-
-        return response.status(submitValidator.status).json(submitValidator.message)
+        const submitValidator = this.UserService.responseValidator(result.log);
+        
+        return response.status(submitValidator.status).json({
+            data: result.data[0],
+            message: submitValidator.message
+        })
     }
 
     async update(request: Request, response: Response) {

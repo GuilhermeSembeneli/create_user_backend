@@ -51,14 +51,15 @@ export class UserRepository {
                 expiresIn: '1d'
             });
 
-            await conenctKnex('users').insert({
+            const create = await conenctKnex('users').insert({
                 username, 
                 password: hashPassword,
                 token,
                 user_id: v4()
-            });
+            }).returning(['id', 'token', 'username', 'user_id']);
+            console.log(create)
 
-            return 'success';
+            return {log: 'success', data: create};
         } catch (error) {
             console.log(error)
             return error.message;

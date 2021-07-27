@@ -11,7 +11,7 @@ export interface IMessage {
 
 export interface IUserProps {
     status: number
-    message: string | IMessage
+    message?: string | IMessage
 }
 
 export interface IUpdate {
