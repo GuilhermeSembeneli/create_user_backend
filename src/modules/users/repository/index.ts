@@ -116,6 +116,8 @@ export class UserRepository {
             return {
                 user: {
                     username: findUser.username,
+                    id: findUser.id,
+                    user_id: findUser.user_id,
                     token
                 },
             }
