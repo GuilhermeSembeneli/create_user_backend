@@ -30,7 +30,7 @@ export class UserService {
                 }
             case 'duplicated':
                 return {
-                    status: 406, error: 'Usuario já cadastrado.'
+                    status: 406, message: 'Usuario já cadastrado.'
                 }
             case 'invaliduser':
                 return {
