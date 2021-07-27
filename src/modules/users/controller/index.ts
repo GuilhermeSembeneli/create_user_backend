@@ -41,7 +41,7 @@ export class UserController {
         const submitValidator = this.UserService.responseValidator(result.log);
         
         return response.status(submitValidator.status).json({
-            data: result.data[0],
+            data: result.data,
             message: submitValidator.message
         })
     }
