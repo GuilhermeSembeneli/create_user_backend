@@ -52,7 +52,7 @@ export class UserService {
                 }
             case 'invalidtoken':
                 return {
-                    status: 400, message: {
+                    status: 401, message: {
                         error: 'Token invalido.'
                     }
                 }
