@@ -57,7 +57,6 @@ export class UserRepository {
                 token,
                 user_id: v4()
             }).returning(['id', 'token', 'username', 'user_id']);
-            console.log(create)
 
             return {log: 'success', data: create};
         } catch (error) {

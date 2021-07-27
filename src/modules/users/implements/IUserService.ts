@@ -11,6 +11,7 @@ export interface IMessage {
 
 export interface IUserProps {
     status: number
+    error?: string
     message?: string | IMessage
 }
 
