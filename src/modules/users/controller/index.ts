@@ -38,7 +38,7 @@ export class UserController {
 
         const result = await this.UserRepository.create({username, password});
 
-        const submitValidator = this.UserService.responseValidator(result.log);
+        const submitValidator = this.UserService.responseValidator(result.log ? result.log : result);
         
         return response.status(submitValidator.status).json({
             data: result.data,
