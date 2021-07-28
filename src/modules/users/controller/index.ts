@@ -47,12 +47,12 @@ export class UserController {
     }
 
     async update(request: Request, response: Response) {
-        const { username, user_id, password } = request.body;
+        const { username, user_id, password, newPassword } = request.body;
 
         const validator = this.UserService.validator('username', request.body);
         if (validator.length) return response.status(400).json(validator);
 
-        const update = await this.UserRepository.update({user_id, username, password});
+        const update = await this.UserRepository.update({user_id, username, password, newPassword});
 
         const submitValidator = this.UserService.responseValidator(update);
        

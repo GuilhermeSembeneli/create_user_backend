@@ -19,4 +19,5 @@ export interface IUpdate {
     username: string
     user_id: string
     password: string
+    newPassword?: string
 }

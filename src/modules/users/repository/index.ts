@@ -18,7 +18,7 @@ export class UserRepository {
                 user_id: user.user_id,
                 created_at: user.created_at
             }))
-            
+
             return map;
         } catch (error) {
             console.log(error)
@@ -84,17 +84,18 @@ export class UserRepository {
         }
     }
 
-    async update({ user_id, username, password }: IUpdate) {
+    async update({ user_id, username, password, newPassword }: IUpdate) {
         try {
             if (!UUIDv4.validate(user_id)) return 'notfound';
 
-            const findUser = await conenctKnex('users').where({ user_id });
-            if (!findUser.length) return 'notfound';
+            const findUser = await conenctKnex('users').where({ user_id }).first();
+            if (!findUser) return 'notfound';
+            const descryptPassword = await compare(password, findUser.password);
+            if (!descryptPassword) return 'invaliduser';
 
-            const hashPassword = await hash(password, 8);
-
+            const hashPassword = await hash(newPassword, 8);
             await conenctKnex('users').where({ user_id }).update({
-                username, hashPassword
+                username, password: hashPassword
             });
 
             return 'updated'
@@ -125,7 +126,7 @@ export class UserRepository {
             const findUser = await conenctKnex('users').where({ username }).first();
 
             if (!findUser) return 'notfound'
-            const descryptPassword = await compare(password, findUser.password)
+            const descryptPassword = await compare(password, findUser.password);
             if (!descryptPassword) return 'invaliduser'
 
             let token = jwt.sign({ id: username }, process.env.SECRET_KEY, {
