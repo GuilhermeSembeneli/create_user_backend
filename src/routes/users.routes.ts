@@ -6,7 +6,7 @@ import { VerifyJWT } from '../modules/users/controller/VerifyJWT';
 const usersRoutes = Router();
 
 
-usersRoutes.get('/:id', VerifyJWT, (request, response) => {
+usersRoutes.get('/user/:id', VerifyJWT, (request, response) => {
     userController.findById(request, response);
 })
 
